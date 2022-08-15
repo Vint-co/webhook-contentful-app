@@ -43,6 +43,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy:infra": "sam build && sam deploy --s3-bucket vint-cft-bucket --capabilities CAPABILITY_IAM --region us-east-1 --stack-name contentful-webhook-app",
+    "deploy:app": "sam build && sam deploy --s3-bucket vint-cft-bucket --capabilities CAPABILITY_IAM --region us-east-1 --stack-name contentful-webhook-app",
     "test": "CI=true react-scripts test --verbose --colors",
     "test:watch": "react-scripts test --verbose",
     "lint": "eslint ./src/**/*.*",
