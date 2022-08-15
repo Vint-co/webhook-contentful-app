@@ -72,7 +72,7 @@ Resources:
     Properties:
       CodeUri: lambda
       FunctionName: contentful-invoke-pipeline
-      Handler: index.handler
+      Handler: bundle.handler
       Runtime: nodejs16.x
       Policies:
         - Version: "2012-10-17"
