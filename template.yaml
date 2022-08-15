@@ -65,6 +65,25 @@ Resources:
             Resource: !GetAtt S3Bucket.Arn
             Principal:
               CanonicalUser: !GetAtt CloudFrontOriginAccessIdentity.S3CanonicalUserId
+  
+
+  LambdaInvokePipeline:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda
+      FunctionName: contentful-invoke-pipeline
+      Handler: index.handler
+      Runtime: nodejs16.x
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - lambda:GetFunction
+                - lambda:UpdateFunctionCode
+              Resource:
+                # - !GetAtt LambdaInvokePipeline.Arn
+                - arn:aws:codepipeline:us-east-1:312101607936:Vint-UI-Pipeline-test-collections-Pipeline-2T98CZ3FREAT
 
 
 Outputs:
