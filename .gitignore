@@ -25,3 +25,5 @@ yarn-error.log*
 .aws-sam
 
 lambda/node_modules
+lambda/bundle.js
+lambda/index.js

@@ -1,6 +1,44 @@
 ![Contentful App](https://img.shields.io/badge/Contentful-App-blue)
 [![Tests Action Status](https://github.com/yn5/webhook-contentful-app/workflows/Tests/badge.svg)](https://github.com/yn5/webhook-contentful-app/actions)
 
+# Patrick!
+
+This repo will create
+
+- Contentful Webhook App
+- Infra to host webhook App
+- Infra for Lambda to invoke a pipeline
+
+## Quick Deploy
+```
+  npm run build:webhook
+  npm run deploy:webhook
+  npm run build:app
+  npm run deploy:app
+```
+
+## High Level
+
+- Contentful webhook app is the application code needed to create / style the button that will live in our CMS. There is additional configuration that will allow a callback to execute to a URL provided.
+- Contentful looks to our cloudfront / s3 infra to find where we are hosting our code
+- The webhook url we provide to our button invokes our Lambda, which in turns invokes a CodePipeline
+
+## TS and webpack
+
+```
+  npm run build:webhook
+  npm run deploy:webhook
+```
+
+### The breakdown
+
+```
+  npx tsc -b && npx webpack --progress
+```
+
+Compiles TS according to `tsconfig.json` and creates an index.js in /lambda folder. Subsequently creates the mapping from index.js->bundle.js from our `webpack.config.js`
+
+
 # Webhook Contentful app
 
 > A Contentful App to trigger a custom webhook from the sidebar.
