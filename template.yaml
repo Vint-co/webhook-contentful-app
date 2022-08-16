@@ -77,6 +77,8 @@ Resources:
       Environment:
         Variables:
           PIPELINE_NAME: Vint-UI-Pipeline-test-collections-Pipeline-2T98CZ3FREAT
+      FunctionUrlConfig:
+        AuthType: NONE
       Policies:
         - Version: "2012-10-17"
           Statement:
