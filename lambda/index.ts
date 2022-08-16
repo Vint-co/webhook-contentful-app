@@ -1,12 +1,13 @@
 import CodePipeline from 'aws-sdk/clients/codepipeline';
 
-export const handler = (
-  event: CustomEvent
-  //   context: Context,
-  //   callback: void
-): void => {
+export const handler = (): //   event: CustomEvent
+//   context: Context,
+//   callback: void
+void => {
   // Retrieve the CodePipeline name
-  const pipelineName = event.pipelineName;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const pipelineName = process.env.PIPELINE_NAME!;
+  console.log(pipelineName);
 
   //Instantiate CodePipeline
   const codepipeline = new CodePipeline();
@@ -24,8 +25,4 @@ export const handler = (
   });
 
   return;
-};
-
-type CustomEvent = {
-  pipelineName: string;
 };

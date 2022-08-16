@@ -74,6 +74,9 @@ Resources:
       FunctionName: contentful-invoke-pipeline
       Handler: bundle.handler
       Runtime: nodejs16.x
+      Environment:
+        Variables:
+          PIPELINE_NAME: Vint-UI-Pipeline-test-collections-Pipeline-2T98CZ3FREAT
       Policies:
         - Version: "2012-10-17"
           Statement:
