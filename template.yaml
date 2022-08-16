@@ -79,8 +79,7 @@ Resources:
           Statement:
             - Effect: Allow
               Action:
-                - lambda:GetFunction
-                - lambda:UpdateFunctionCode
+                - codepipeline:StartPipelineExecution
               Resource:
                 # - !GetAtt LambdaInvokePipeline.Arn
                 - arn:aws:codepipeline:us-east-1:312101607936:Vint-UI-Pipeline-test-collections-Pipeline-2T98CZ3FREAT

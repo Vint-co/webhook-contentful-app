@@ -1,6 +1,6 @@
 import CodePipeline from 'aws-sdk/clients/codepipeline';
 
-export const lambdaHandler = (
+export const handler = (
   event: CustomEvent
   //   context: Context,
   //   callback: void
