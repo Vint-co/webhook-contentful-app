@@ -1,6 +1,7 @@
 import CodePipeline from 'aws-sdk/clients/codepipeline';
+import { APIGatewayProxyResult } from 'aws-lambda';
 
-export function handler(): HttpResponse {
+export function handler(): APIGatewayProxyResult {
   // Retrieve the CodePipeline name
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const pipelineName = process.env.PIPELINE_NAME!;
@@ -12,19 +13,22 @@ export function handler(): HttpResponse {
     name: pipelineName,
   };
 
-  codepipeline.startPipelineExecution(params, function (err, data) {
-    if (err) {
-      console.log(err, err.stack); // an error occurred
-    } else {
-      console.log(data); // successful response
-      return {
-        statusCode: 200,
-        body: JSON.stringify({
-          message: 'Successfully started pipeline',
-        }),
-      };
-    }
-  });
+  try {
+    const response = codepipeline.startPipelineExecution(params);
+
+    console.log(response);
+
+    return {
+      statusCode: 200,
+      body: '<html><body><h1>Success</h1></body></html>',
+      headers: {
+        'content-type': 'text/html',
+      },
+      isBase64Encoded: false,
+    };
+  } catch (error: any) {
+    console.log(error); // an error occurred
+  }
 
   return {
     statusCode: 500,
@@ -33,8 +37,3 @@ export function handler(): HttpResponse {
     }),
   };
 }
-
-type HttpResponse = {
-  statusCode: number;
-  body: string;
-};

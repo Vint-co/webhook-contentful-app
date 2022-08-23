@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=14.0.0 <15.0.0",
-    "npm": "^6.14.15"
+    "node": ">=16.0.0 <17.0.0",
+    "npm": "^8.15.0"
   },
   "dependencies": {
     "@contentful/field-editor-single-line": "^1.1.2",
@@ -60,9 +60,7 @@
     "test:watch": "react-scripts test --verbose",
     "lint": "eslint ./src/**/*.*",
     "lint:fix": "eslint ./src/**/*.* --fix",
-    "format": "prettier --check src/**/*.*",
-    "format:fix": "prettier --write src/**/*.*",
-    "prepare": "husky install"
+    "format": "prettier --check src/**/*.*"
   },
   "commitlint": {
     "extends": [
