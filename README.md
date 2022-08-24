@@ -11,8 +11,8 @@ This repo will create
 
 ## Quick Deploy
 ```
-  npm run build:webhook
-  npm run deploy:webhook
+  npm run build:infra
+  npm run deploy:infra
   npm run build:app
   npm run deploy:app
 ```
@@ -23,21 +23,11 @@ This repo will create
 - Contentful looks to our cloudfront / s3 infra to find where we are hosting our code
 - The webhook url we provide to our button invokes our Lambda, which in turns invokes a CodePipeline
 
-## TS and webpack
 
-```
-  npm run build:webhook
-  npm run deploy:webhook
-```
-
-### The breakdown
-
-```
-  npx tsc -b && npx webpack --progress
-```
-
-Compiles TS according to `tsconfig.json` and creates an index.js in /lambda folder. Subsequently creates the mapping from index.js->bundle.js from our `webpack.config.js`
-
+## Last steps
+- Need to update app deploy script to use correct S3 bucket
+- Need to update Contentful webhook endpoint with lambda function url
+- Need to update Contentful webhook app storage location with cloudfront endpoint
 
 # Webhook Contentful app
 
