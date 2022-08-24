@@ -1,7 +1,7 @@
 import json
 
 
-def success_response(response):
+def success_response():
     return generate_response(
         200, json.dumps({"message": 'success'})
     )

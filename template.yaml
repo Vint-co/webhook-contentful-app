@@ -70,7 +70,7 @@ Resources:
   LambdaInvokePipeline:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambda
+      CodeUri: ./lambda
       FunctionName: contentful-invoke-pipeline
       Handler: invoke_pipeline.lambda_handler
       Runtime: python3.9
@@ -86,7 +86,6 @@ Resources:
               Action:
                 - codepipeline:StartPipelineExecution
               Resource:
-                # - !GetAtt LambdaInvokePipeline.Arn
                 - arn:aws:codepipeline:us-east-1:312101607936:Vint-UI-Pipeline-test-collections-Pipeline-2T98CZ3FREAT
 
 

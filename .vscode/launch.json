@@ -1,21 +1,23 @@
 {
-    "configurations": [
-      {
-        "type": "aws-sam",
-        "request": "direct-invoke",
-        "name": "Invoke Lambda",
-        "invokeTarget": {
-          "target": "template",
-          "templatePath": "template.yaml",
-          "logicalId": "LambdaInvokePipeline"
-        },
-        "lambda": {
-          "runtime": "python3.9",
-          "environmentVariables": {
-            "PIPELINE_NAME": "Vint-UI-Pipeline-test-collections-Pipeline-2T98CZ3FREAT"
-          }
-        }
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "aws-sam",
+      "request": "direct-invoke",
+      "name": "Invoke Pipeline",
+      "invokeTarget": {
+        "target": "template",
+        "templatePath": "template.yaml",
+        "logicalId": "LambdaInvokePipeline"
       },
-    ]
-  }
-  
+      "lambda": {
+        "environmentVariables": {
+          "PIPELINE_NAME": "Vint-UI-Pipeline-test-collections-Pipeline-2T98CZ3FREAT"
+        },
+        "payload": {
+          "json": {}
+        }
+      }
+    }
+  ]
+}
