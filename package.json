@@ -52,7 +52,7 @@
     "start": "react-scripts start",
     "build:app": "react-scripts build",
     "deploy:app": "aws s3 sync ./build s3://contentful-webhook-app-s3bucket-hdoudzsox3ci",
-    "build:webhook": "npx tsc -b && npx webpack --progress",
+    "build:webhook": "npx tsc -b",
     "deploy:webhook": "sam build && sam deploy --s3-bucket vint-cft-bucket --capabilities CAPABILITY_IAM --region us-east-1 --stack-name contentful-webhook-app",
     "update-dependencies": "(cd lambda && echo \"Updating deps ...\" && rm -rf node_modules package-lock.json && npm update --dev); npm i",
     "postinstall": "(cd lambda && echo \"Updating ${DIR} ...\" && npm install --ignore-scripts)",

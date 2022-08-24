@@ -1,22 +1,21 @@
 {
-  "configurations": [
-
-    {
-      "type": "aws-sam",
-      "request": "direct-invoke",
-      "name": "Invoke Lambda",
-      "preLaunchTask": "npm: build:webhook",
-      "invokeTarget": {
-        "target": "code",
-        "lambdaHandler": "index.handler",
-        "projectRoot": "${workspaceFolder}/lambda"
-      },
-      "lambda": {
-        "runtime": "nodejs16.x",
-        "environmentVariables": {
-          "PIPELINE_NAME": "Vint-UI-Pipeline-test-collections-Pipeline-2T98CZ3FREAT"
+    "configurations": [
+      {
+        "type": "aws-sam",
+        "request": "direct-invoke",
+        "name": "Invoke Lambda",
+        "invokeTarget": {
+          "target": "template",
+          "templatePath": "template.yaml",
+          "logicalId": "LambdaInvokePipeline"
         },
-      }
-    }
-  ]
-}
+        "lambda": {
+          "runtime": "python3.9",
+          "environmentVariables": {
+            "PIPELINE_NAME": "Vint-UI-Pipeline-test-collections-Pipeline-2T98CZ3FREAT"
+          }
+        }
+      },
+    ]
+  }
+  
