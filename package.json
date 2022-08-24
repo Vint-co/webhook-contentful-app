@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=14.0.0 <15.0.0",
-    "npm": "^6.14.15"
+    "node": ">=16.0.0 <17.0.0",
+    "npm": "^8.15.0"
   },
   "dependencies": {
     "@contentful/field-editor-single-line": "^1.1.2",
@@ -15,11 +15,13 @@
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.6.0",
+    "aws-sdk": "^2.1194.0",
     "contentful-ui-extensions-sdk": "^4.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.1",
-    "typescript": "^4.7.2"
+    "tsc": "^2.0.4",
+    "typescript": "^4.7.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
@@ -27,6 +29,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@types/aws-lambda": "^8.10.102",
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.38",
     "@types/react": "^17.0.38",
@@ -38,20 +41,26 @@
     "eslint-plugin-react": "^7.28.0",
     "husky": "^7.0.4",
     "jest-environment-jsdom-sixteen": "^2.0.0",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "terser-webpack-plugin": "^4.1.0",
+    "ts-loader": "^8.0.17",
+    "webpack": "^4.44.1",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.12"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy:infra": "sam build && sam deploy --s3-bucket vint-cft-bucket --capabilities CAPABILITY_IAM --region us-east-1 --stack-name contentful-webhook-app",
-    "deploy:app": "sam build && sam deploy --s3-bucket vint-cft-bucket --capabilities CAPABILITY_IAM --region us-east-1 --stack-name contentful-webhook-app",
+    "build:app": "react-scripts build",
+    "deploy:app": "aws s3 sync ./build s3://contentful-webhook-app-s3bucket-xng2i56g529o",
+    "build:infra": "sam build",
+    "deploy:infra": "sam deploy --s3-bucket vint-cft-bucket --capabilities CAPABILITY_IAM --region us-east-1 --stack-name contentful-webhook-app",
+    "update-dependencies": "(cd lambda && echo \"Updating deps ...\" && rm -rf node_modules package-lock.json && npm update --dev); npm i",
+    "postinstall": "(cd lambda && echo \"Updating ${DIR} ...\" && npm install --ignore-scripts)",
     "test": "CI=true react-scripts test --verbose --colors",
     "test:watch": "react-scripts test --verbose",
     "lint": "eslint ./src/**/*.*",
     "lint:fix": "eslint ./src/**/*.* --fix",
-    "format": "prettier --check src/**/*.*",
-    "format:fix": "prettier --write src/**/*.*",
-    "prepare": "husky install"
+    "format": "prettier --check src/**/*.*"
   },
   "commitlint": {
     "extends": [

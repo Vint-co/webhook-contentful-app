@@ -6,9 +6,9 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   Contentful Webhook app
 
-Globals:
-  Function:
-    Timeout: 60
+# Globals:
+#   Function:
+#     Timeout: 60
 
 Resources:
   S3Bucket:
@@ -65,6 +65,28 @@ Resources:
             Resource: !GetAtt S3Bucket.Arn
             Principal:
               CanonicalUser: !GetAtt CloudFrontOriginAccessIdentity.S3CanonicalUserId
+  
+
+  LambdaInvokePipeline:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./lambda
+      FunctionName: contentful-invoke-pipeline
+      Handler: invoke_pipeline.lambda_handler
+      Runtime: python3.9
+      Environment:
+        Variables:
+          PIPELINE_NAME: Vint-UI-Pipeline-test-collections-Pipeline-2T98CZ3FREAT
+      FunctionUrlConfig:
+        AuthType: NONE
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - codepipeline:StartPipelineExecution
+              Resource:
+                - arn:aws:codepipeline:us-east-1:312101607936:Vint-UI-Pipeline-test-collections-Pipeline-2T98CZ3FREAT
 
 
 Outputs:
